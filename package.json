@@ -1,0 +1,18 @@
+{
+  "name": "nova-salud-monorepo",
+  "version": "1.0.0",
+  "description": "Sistema POS y Gestión de Inventario para Nova Salud",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start:api": "npm run start --workspace=apps/api",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web-pos": "npm run dev --workspace=apps/web-pos"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

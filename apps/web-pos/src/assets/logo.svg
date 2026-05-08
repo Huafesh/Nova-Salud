@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" rx="40" fill="#0f172a" />
+  <path d="M150 100 h100 v60 h60 v100 h-60 v60 h-100 v-60 h-60 v-100 h60 z" fill="#10b981" opacity="0.1"/>
+  <g fill="none" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 160 280 L 160 120 L 240 280 L 240 120" stroke="#10b981" />
+    <path d="M 120 200 L 280 200" stroke="#34d399" opacity="0.8" />
+  </g>
+  <text x="200" y="340" font-family="'Inter', 'Roboto', sans-serif" font-size="32" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">NOVA SALUD</text>
+  <text x="200" y="365" font-family="'Inter', 'Roboto', sans-serif" font-size="14" font-weight="400" fill="#94a3b8" text-anchor="middle" letter-spacing="4">SISTEMA POS</text>
+</svg>
