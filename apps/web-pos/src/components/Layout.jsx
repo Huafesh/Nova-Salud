@@ -1,7 +1,7 @@
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogOut, Package, ShoppingCart, User as UserIcon } from 'lucide-react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
 import { useState, useEffect } from 'react';
 
 // ICONOS ESTRICTAMENTE CUADRADOS
