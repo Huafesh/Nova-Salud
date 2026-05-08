@@ -1,16 +1,73 @@
-import { useState } from 'react'
-import logo from './assets/logo.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Layout from './components/Layout';
+import Login from './pages/Login';
+import Inventory from './pages/Inventory';
+import POS from './pages/POS';
+import './index.css';
+
+// Protected Route Wrapper
+const ProtectedRoute = ({ children, allowedRoles }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) return <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Cargando sistema...</div>;
+  
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/pos" replace />;
+  }
+
+  return children;
+};
+
+// Root redirect logic
+const RootRedirect = () => {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  return user ? <Navigate to="/pos" replace /> : <Navigate to="/login" replace />;
+};
 
 function App() {
+  useEffect(() => {
+    // Establecer el tema guardado o por defecto "dark"
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#0f172a', color: 'white', fontFamily: 'sans-serif' }}>
-      <img src={logo} alt="Nova Salud Logo" style={{ width: '200px', marginBottom: '20px' }} />
-      <h1>Nova Salud POS</h1>
-      <p style={{ color: '#94a3b8' }}>El sistema base se ha inicializado correctamente.</p>
-      <p style={{ color: '#10b981', marginTop: '20px', fontWeight: 'bold' }}>Esperando código de UI Empresarial...</p>
-    </div>
-  )
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          
+          {/* Main App with Layout */}
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<RootRedirect />} />
+            <Route path="pos" element={
+              <ProtectedRoute allowedRoles={['admin', 'cashier']}>
+                <POS />
+              </ProtectedRoute>
+            } />
+            <Route path="inventory" element={
+              <ProtectedRoute allowedRoles={['admin', 'cashier']}>
+                <Inventory />
+              </ProtectedRoute>
+            } />
+          </Route>
+          
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
