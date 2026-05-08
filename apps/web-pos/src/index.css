@@ -90,6 +90,12 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 1px var(--accent-color);
 }
 
+/* Corregir flechas de inputs numéricos en modo oscuro */
+[data-theme='dark'] input[type="number"]::-webkit-inner-spin-button,
+[data-theme='dark'] input[type="number"]::-webkit-outer-spin-button {
+  filter: invert(1);
+}
+
 /* HIGH DENSITY DATA TABLES */
 table {
   width: 100%;
