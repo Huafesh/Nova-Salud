@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import logoUrl from '../assets/logo.png';
 
 /**
  * Genera e imprime un comprobante PDF de venta tipo ticket de farmacia.
@@ -16,7 +17,13 @@ export const generateReceipt = (saleData, cartItems, total) => {
 
   const pageWidth = doc.internal.pageSize.getWidth();
   const margin = 5;
-  let y = 8;
+  let y = 5;
+
+  // ─── LOGO ────────────────────────────────────────────────────────────────────
+  const logoSize = 18; // Tamaño del logo en mm
+  const logoX = (pageWidth - logoSize) / 2;
+  doc.addImage(logoUrl, 'PNG', logoX, y, logoSize, logoSize);
+  y += logoSize + 3;
 
   // ─── CABECERA ───────────────────────────────────────────────────────────────
   doc.setFontSize(14);
