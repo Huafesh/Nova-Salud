@@ -1,0 +1,43 @@
+========================================================
+     NOVA SALUD POS - CREDENCIALES DE ACCESO
+========================================================
+
+CREDENCIALES DE LOGEO AL SISTEMA
+----------------------------------
+  Usuario : admin
+  Clave   : admin123
+
+========================================================
+
+INSTRUCCIONES PARA INICIAR EL SISTEMA
+----------------------------------
+
+PASO 1 - Iniciar la base de datos con Docker:
+  Abrir Docker Desktop y asegurarse que este corriendo.
+  Luego abrir una terminal en la carpeta del proyecto y ejecutar:
+
+    cd docker
+    docker compose up -d
+
+PASO 2 - Iniciar el servidor backend (API):
+  Abrir una terminal en la carpeta "apps/api" y ejecutar:
+
+    npm start
+
+PASO 3 - Iniciar la aplicacion (Frontend):
+  Abrir una terminal en la carpeta "apps/web-pos" y ejecutar:
+
+    npm run dev
+
+  Luego abrir el navegador en: http://localhost:5173
+
+========================================================
+
+CONEXION A MONGODB COMPASS (para ver los datos)
+----------------------------------
+  URI: mongodb://admin:secretpassword@127.0.0.1:27017/?authSource=admin
+  Usuario BD : admin
+  Contrasena  : secretpassword
+  Base de datos del proyecto: nova-salud
+
+========================================================

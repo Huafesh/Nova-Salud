@@ -1,0 +1,43 @@
+{
+  "name": "nova-salud-electron",
+  "version": "1.0.0",
+  "description": "Nova Salud POS - Aplicacion de escritorio",
+  "main": "main.js",
+  "author": "Nova Salud",
+  "license": "ISC",
+  "scripts": {
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "com.novasalud.pos",
+    "productName": "Nova Salud POS",
+    "win": {
+      "target": "nsis",
+      "icon": "../../apps/web-pos/src/assets/logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "../../apps/web-pos/src/assets/logo.png",
+      "installerHeaderIcon": "../../apps/web-pos/src/assets/logo.png",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "files": [
+      "main.js",
+      "preload.js"
+    ],
+    "extraResources": [
+      {
+        "from": "../api",
+        "to": "api",
+        "filter": ["**/*", "!node_modules/**"]
+      },
+      {
+        "from": "../web-pos/dist",
+        "to": "web-pos-dist",
+        "filter": ["**/*"]
+      }
+    ]
+  }
+}
