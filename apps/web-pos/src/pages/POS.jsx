@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Search, ShoppingCart, Trash2, CheckCircle } from 'lucide-react';
+import { Search, ShoppingCart, Trash2, CheckCircle, FileText } from 'lucide-react';
+import { generateReceipt } from '../utils/generateReceipt';
 
 const POS = () => {
   const [products, setProducts] = useState([]);
@@ -75,17 +76,24 @@ const POS = () => {
     }));
 
     try {
-      await axios.post('/sales', {
+      const response = await axios.post('/sales', {
         items,
         paymentMethod: 'efectivo',
         receiptType: 'digital'
       });
       
+      // Guardar carrito antes de limpiarlo para el PDF
+      const cartSnapshot = [...cart];
+      const totalSnapshot = total;
+      
       setCart([]);
-      setSuccessMsg('¡Venta Registrada Exitosamente!');
+      setSuccessMsg('¡Venta Registrada! Abriendo comprobante...');
       fetchProducts(); // Refresh stock
       
-      setTimeout(() => setSuccessMsg(''), 3000);
+      // Generar comprobante PDF
+      generateReceipt(response.data, cartSnapshot, totalSnapshot);
+      
+      setTimeout(() => setSuccessMsg(''), 4000);
       if (searchInputRef.current) searchInputRef.current.focus();
       
     } catch (error) {
@@ -222,7 +230,12 @@ const POS = () => {
               cursor: cart.length === 0 ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? 'PROCESANDO...' : 'REGISTRAR VENTA'}
+            {loading ? 'PROCESANDO...' : (
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                <FileText size={20} />
+                REGISTRAR VENTA
+              </span>
+            )}
           </button>
         </div>
       </div>
