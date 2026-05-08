@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, Trash2 } from 'lucide-react';
+import ConfirmDialog from './ConfirmDialog';
 
 const ProductModal = ({ isOpen, onClose, onSave, onDelete, productToEdit }) => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const ProductModal = ({ isOpen, onClose, onSave, onDelete, productToEdit }) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     if (productToEdit) {
@@ -71,16 +73,18 @@ const ProductModal = ({ isOpen, onClose, onSave, onDelete, productToEdit }) => {
   };
 
   const handleDelete = async () => {
-    if (window.confirm('¿Estás seguro de que deseas ELIMINAR este producto definitivamente? Esta acción no se puede deshacer.')) {
-      setLoading(true);
-      try {
-        await onDelete(productToEdit._id);
-        // Parent will close modal
-      } catch (err) {
-        setError(err.response?.data?.message || err.message || 'Error al eliminar el producto');
-      } finally {
-        setLoading(false);
-      }
+    setShowConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    setShowConfirm(false);
+    setLoading(true);
+    try {
+      await onDelete(productToEdit._id);
+    } catch (err) {
+      setError(err.response?.data?.message || err.message || 'Error al eliminar el producto');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -209,6 +213,18 @@ const ProductModal = ({ isOpen, onClose, onSave, onDelete, productToEdit }) => {
 
         </form>
       </div>
+
+      {showConfirm && (
+        <ConfirmDialog
+          message={`¿Eliminar "${productToEdit?.name}" definitivamente?`}
+          detail="Esta acción no se puede deshacer. El producto será removido permanentemente de la base de datos."
+          confirmLabel="SÍ, ELIMINAR"
+          cancelLabel="CANCELAR"
+          type="danger"
+          onConfirm={confirmDelete}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
     </div>
   );
 };

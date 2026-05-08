@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { Search, ShoppingCart, Trash2, CheckCircle, FileText } from 'lucide-react';
 import { generateReceipt } from '../utils/generateReceipt';
+import Toast from '../components/Toast';
 
 const POS = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,12 @@ const POS = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+  const [toast, setToast] = useState(null); // { message, type }
   const searchInputRef = useRef(null);
+
+  const showToast = useCallback((message, type = 'error') => {
+    setToast({ message, type });
+  }, []);
 
   useEffect(() => {
     fetchProducts();
@@ -40,14 +46,14 @@ const POS = () => {
 
   const addToCart = (product) => {
     if (product.stock <= 0) {
-      alert(`Sin stock de: ${product.name}`);
+      showToast(`Sin stock disponible: ${product.name}`, 'warning');
       return;
     }
 
     const existingItem = cart.find(item => item.product._id === product._id);
     if (existingItem) {
       if (existingItem.quantity >= product.stock) {
-        alert('No hay suficiente stock');
+        showToast('No hay suficiente stock disponible', 'warning');
         return;
       }
       setCart(cart.map(item => 
@@ -97,7 +103,7 @@ const POS = () => {
       if (searchInputRef.current) searchInputRef.current.focus();
       
     } catch (error) {
-      alert(error.response?.data?.message || 'Error al procesar la venta');
+      showToast(error.response?.data?.message || 'Error al procesar la venta', 'error');
     } finally {
       setLoading(false);
     }
@@ -112,6 +118,15 @@ const POS = () => {
 
   return (
     <div style={{ display: 'flex', gap: '1.5rem', height: '100%' }}>
+
+      {/* TOAST NOTIFICATIONS */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
       
       {/* LEFT PANEL - PRODUCTS */}
       <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
