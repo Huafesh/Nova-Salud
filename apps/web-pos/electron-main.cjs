@@ -15,7 +15,7 @@ let apiProcess = null;
 // ─── VENTANA PRINCIPAL ────────────────────────────────────────────────────────
 function createWindow() {
   const iconPath = app.isPackaged
-    ? path.join(process.resourcesPath, 'favicon.png')
+    ? path.join(__dirname, 'dist', 'favicon.png')
     : path.join(__dirname, 'public', 'favicon.png');
 
   mainWindow = new BrowserWindow({

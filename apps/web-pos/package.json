@@ -23,7 +23,7 @@
     },
     "win": {
       "target": "portable",
-      "icon": "src/assets/logo.png"
+      "icon": "public/favicon.png"
     },
     "files": [
       "dist/**/*",
