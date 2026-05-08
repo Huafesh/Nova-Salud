@@ -73,17 +73,21 @@ button.danger:hover {
   background-color: var(--danger-hover);
 }
 
-input, select {
-  padding: 0.5rem;
+input, select, textarea {
+  padding: 0.75rem;
+  background-color: var(--bg-primary);
   border: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
   color: var(--text-primary);
   font-family: inherit;
+  font-size: 0.875rem;
   outline: none;
+  transition: all 0.2s;
+  border-radius: 0 !important;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
   border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color);
 }
 
 /* HIGH DENSITY DATA TABLES */
