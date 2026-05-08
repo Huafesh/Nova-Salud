@@ -90,15 +90,13 @@ const Inventory = () => {
           </div>
         </div>
         
-        {user?.role === 'admin' && (
-          <button 
-            onClick={openModalForCreate}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-          >
-            <Plus size={18} />
-            NUEVO PRODUCTO
-          </button>
-        )}
+        <button 
+          onClick={openModalForCreate}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+        >
+          <Plus size={18} />
+          NUEVO PRODUCTO
+        </button>
       </div>
 
       <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
@@ -113,7 +111,7 @@ const Inventory = () => {
                 <th style={{ width: '150px' }}>CATEGORÍA</th>
                 <th style={{ width: '100px', textAlign: 'right' }}>PRECIO ($)</th>
                 <th style={{ width: '100px', textAlign: 'right' }}>STOCK</th>
-                {user?.role === 'admin' && <th style={{ width: '100px', textAlign: 'center' }}>ACCIONES</th>}
+                <th style={{ width: '100px', textAlign: 'center' }}>ACCIONES</th>
               </tr>
             </thead>
             <tbody>
@@ -133,22 +131,20 @@ const Inventory = () => {
                     <td>{product.category}</td>
                     <td style={{ textAlign: 'right', fontWeight: 'bold' }}>{product.price.toFixed(2)}</td>
                     <td style={{ textAlign: 'right', fontWeight: 'bold', fontSize: '1.1rem' }}>{product.stock}</td>
-                    {user?.role === 'admin' && (
-                      <td style={{ textAlign: 'center' }}>
-                        <button 
-                          onClick={() => openModalForEdit(product)}
-                          style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: isCritical ? 'rgba(0,0,0,0.3)' : 'var(--bg-primary)', color: isCritical ? '#fff' : 'var(--text-primary)', border: isCritical ? '1px solid rgba(255,255,255,0.5)' : '1px solid var(--border-color)' }}
-                        >
-                          EDITAR
-                        </button>
-                      </td>
-                    )}
+                    <td style={{ textAlign: 'center' }}>
+                      <button 
+                        onClick={() => openModalForEdit(product)}
+                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: isCritical ? 'rgba(0,0,0,0.3)' : 'var(--bg-primary)', color: isCritical ? '#fff' : 'var(--text-primary)', border: isCritical ? '1px solid rgba(255,255,255,0.5)' : '1px solid var(--border-color)' }}
+                      >
+                        EDITAR
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
               {filteredProducts.length === 0 && (
                 <tr>
-                  <td colSpan={user?.role === 'admin' ? 6 : 5} style={{ textAlign: 'center', padding: '2rem' }}>
+                  <td colSpan={6} style={{ textAlign: 'center', padding: '2rem' }}>
                     No se encontraron productos.
                   </td>
                 </tr>

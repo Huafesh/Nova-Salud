@@ -37,8 +37,8 @@ const Layout = () => {
   };
 
   const navItems = [
-    { path: '/pos', label: 'Caja (POS)', icon: ShoppingCart, roles: ['admin', 'cashier'] },
-    { path: '/inventory', label: 'Inventario', icon: Package, roles: ['admin', 'cashier'] },
+    { path: '/pos', label: 'Caja (POS)', icon: ShoppingCart },
+    { path: '/inventory', label: 'Inventario', icon: Package }
   ];
 
   return (
@@ -51,7 +51,7 @@ const Layout = () => {
         </div>
         
         <nav style={{ flex: 1, padding: '1rem 0' }}>
-          {navItems.filter(item => item.roles.includes(user?.role)).map((item) => {
+          {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
             return (
@@ -83,7 +83,7 @@ const Layout = () => {
             </div>
             <div>
               <p style={{ fontWeight: 'bold', fontSize: '0.875rem' }}>{user?.name}</p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>{user?.role}</p>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>Usuario del Sistema</p>
             </div>
           </div>
           <button 

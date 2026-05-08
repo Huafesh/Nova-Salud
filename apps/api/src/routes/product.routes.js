@@ -7,9 +7,9 @@ const router = express.Router();
 router.get('/', verifyToken, getProducts);
 router.get('/:id', verifyToken, getProductById);
 
-// Only admin can modify products
-router.post('/', verifyToken, isAdmin, createProduct);
-router.put('/:id', verifyToken, isAdmin, updateProduct);
-router.delete('/:id', verifyToken, isAdmin, deleteProduct);
+// All logged-in users can modify products
+router.post('/', verifyToken, createProduct);
+router.put('/:id', verifyToken, updateProduct);
+router.delete('/:id', verifyToken, deleteProduct);
 
 export default router;

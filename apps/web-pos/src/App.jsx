@@ -52,12 +52,12 @@ function App() {
           }>
             <Route index element={<RootRedirect />} />
             <Route path="pos" element={
-              <ProtectedRoute allowedRoles={['admin', 'cashier']}>
+              <ProtectedRoute>
                 <POS />
               </ProtectedRoute>
             } />
             <Route path="inventory" element={
-              <ProtectedRoute allowedRoles={['admin', 'cashier']}>
+              <ProtectedRoute>
                 <Inventory />
               </ProtectedRoute>
             } />
