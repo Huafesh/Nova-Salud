@@ -109,7 +109,7 @@ const Inventory = () => {
                 <th style={{ width: '150px' }}>CÓDIGO</th>
                 <th>NOMBRE / DESCRIPCIÓN</th>
                 <th style={{ width: '150px' }}>CATEGORÍA</th>
-                <th style={{ width: '100px', textAlign: 'right' }}>PRECIO ($)</th>
+                <th style={{ width: '100px', textAlign: 'right' }}>PRECIO (S/)</th>
                 <th style={{ width: '100px', textAlign: 'right' }}>STOCK</th>
                 <th style={{ width: '100px', textAlign: 'center' }}>ACCIONES</th>
               </tr>
@@ -129,7 +129,7 @@ const Inventory = () => {
                       )}
                     </td>
                     <td>{product.category}</td>
-                    <td style={{ textAlign: 'right', fontWeight: 'bold' }}>{product.price.toFixed(2)}</td>
+                    <td style={{ textAlign: 'right', fontWeight: 'bold' }}>S/ {product.price.toFixed(2)}</td>
                     <td style={{ textAlign: 'right', fontWeight: 'bold', fontSize: '1.1rem' }}>{product.stock}</td>
                     <td style={{ textAlign: 'center' }}>
                       <button 

@@ -170,7 +170,7 @@ const POS = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                   <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Stock: {product.stock}</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--success-color)' }}>${product.price.toFixed(2)}</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--success-color)' }}>S/ {product.price.toFixed(2)}</div>
                 </div>
               </div>
              );
@@ -197,11 +197,11 @@ const POS = () => {
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 'bold', fontSize: '0.875rem' }}>{item.product.name}</div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                      {item.quantity} x ${item.product.price.toFixed(2)}
+                      {item.quantity} x S/ {item.product.price.toFixed(2)}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{ fontWeight: 'bold' }}>${item.subtotal.toFixed(2)}</div>
+                    <div style={{ fontWeight: 'bold' }}>S/ {item.subtotal.toFixed(2)}</div>
                     <button 
                       onClick={() => removeFromCart(item.product._id)}
                       style={{ padding: '0.25rem', backgroundColor: 'transparent', color: 'var(--danger-color)', border: 'none' }}
@@ -220,7 +220,7 @@ const POS = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem' }}>
             <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>TOTAL A COBRAR</span>
             <span style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--success-color)', lineHeight: 1 }}>
-              ${total.toFixed(2)}
+              S/ {total.toFixed(2)}
             </span>
           </div>
 

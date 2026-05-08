@@ -167,7 +167,7 @@ const ProductModal = ({ isOpen, onClose, onSave, onDelete, productToEdit }) => {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-              <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>PRECIO ($) *</label>
+              <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>PRECIO (S/) *</label>
               <input type="number" step="0.01" min="0" name="price" value={formData.price} onChange={handleChange} style={{ width: '100%' }} required />
             </div>
             
