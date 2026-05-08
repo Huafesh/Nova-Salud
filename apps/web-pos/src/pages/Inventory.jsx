@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AlertTriangle, Plus, Search } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import ProductModal from '../components/ProductModal';
 
 const Inventory = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -21,6 +23,16 @@ const Inventory = () => {
       console.error('Error fetching products', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSaveProduct = async (productData) => {
+    try {
+      const response = await axios.post('/products', productData);
+      setProducts([...products, response.data]);
+      setIsModalOpen(false);
+    } catch (error) {
+      throw error; // Re-throw to be handled by modal
     }
   };
 
@@ -46,7 +58,10 @@ const Inventory = () => {
         </div>
         
         {user?.role === 'admin' && (
-          <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+          >
             <Plus size={18} />
             NUEVO PRODUCTO
           </button>
@@ -106,6 +121,12 @@ const Inventory = () => {
           </table>
         )}
       </div>
+
+      <ProductModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        onSave={handleSaveProduct} 
+      />
     </div>
   );
 };
