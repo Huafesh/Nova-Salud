@@ -7,7 +7,7 @@ import { Sale } from './models/Sale.js';
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://admin:secretpassword@localhost:27017/?authSource=admin';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://admin:secretpassword@localhost:27017/nova-salud?authSource=admin';
 
 const seedDatabase = async () => {
   try {
