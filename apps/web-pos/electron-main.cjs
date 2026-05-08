@@ -62,11 +62,11 @@ function startApiServer() {
 
     console.log('🚀 Iniciando servidor API en:', apiPath);
 
-    apiProcess = spawn('node', ['src/index.js'], {
+    apiProcess = spawn(process.execPath, ['src/index.js'], {
       cwd: apiPath,
-      env: { ...process.env, NODE_ENV: 'production' },
+      env: { ...process.env, NODE_ENV: 'production', ELECTRON_RUN_AS_NODE: '1' },
       stdio: ['ignore', 'pipe', 'pipe'],
-      shell: true,
+      shell: false,
     });
 
     apiProcess.stdout.on('data', (data) => {
