@@ -9,6 +9,7 @@ const Inventory = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -28,12 +29,44 @@ const Inventory = () => {
 
   const handleSaveProduct = async (productData) => {
     try {
-      const response = await axios.post('/products', productData);
-      setProducts([...products, response.data]);
-      setIsModalOpen(false);
+      if (editingProduct) {
+        // Update existing
+        const response = await axios.put(`/products/${editingProduct._id}`, productData);
+        setProducts(products.map(p => p._id === editingProduct._id ? response.data : p));
+      } else {
+        // Create new
+        const response = await axios.post('/products', productData);
+        setProducts([...products, response.data]);
+      }
+      closeModal();
     } catch (error) {
       throw error; // Re-throw to be handled by modal
     }
+  };
+
+  const handleDeleteProduct = async (id) => {
+    try {
+      await axios.delete(`/products/${id}`);
+      setProducts(products.filter(p => p._id !== id));
+      closeModal();
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const openModalForEdit = (product) => {
+    setEditingProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const openModalForCreate = () => {
+    setEditingProduct(null);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditingProduct(null);
   };
 
   const filteredProducts = products.filter(p => 
@@ -59,7 +92,7 @@ const Inventory = () => {
         
         {user?.role === 'admin' && (
           <button 
-            onClick={() => setIsModalOpen(true)}
+            onClick={openModalForCreate}
             style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
           >
             <Plus size={18} />
@@ -102,7 +135,10 @@ const Inventory = () => {
                     <td style={{ textAlign: 'right', fontWeight: 'bold', fontSize: '1.1rem' }}>{product.stock}</td>
                     {user?.role === 'admin' && (
                       <td style={{ textAlign: 'center' }}>
-                        <button style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: isCritical ? 'rgba(0,0,0,0.3)' : 'var(--bg-primary)', color: isCritical ? '#fff' : 'var(--text-primary)', border: isCritical ? '1px solid rgba(255,255,255,0.5)' : '1px solid var(--border-color)' }}>
+                        <button 
+                          onClick={() => openModalForEdit(product)}
+                          style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: isCritical ? 'rgba(0,0,0,0.3)' : 'var(--bg-primary)', color: isCritical ? '#fff' : 'var(--text-primary)', border: isCritical ? '1px solid rgba(255,255,255,0.5)' : '1px solid var(--border-color)' }}
+                        >
                           EDITAR
                         </button>
                       </td>
@@ -124,8 +160,10 @@ const Inventory = () => {
 
       <ProductModal 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        onSave={handleSaveProduct} 
+        onClose={closeModal} 
+        onSave={handleSaveProduct}
+        onDelete={handleDeleteProduct}
+        productToEdit={editingProduct}
       />
     </div>
   );

@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Trash2 } from 'lucide-react';
 
-const ProductModal = ({ isOpen, onClose, onSave }) => {
+const ProductModal = ({ isOpen, onClose, onSave, onDelete, productToEdit }) => {
   const [formData, setFormData] = useState({
     barcode: '',
     name: '',
@@ -13,6 +13,30 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (productToEdit) {
+      setFormData({
+        barcode: productToEdit.barcode || '',
+        name: productToEdit.name || '',
+        description: productToEdit.description || '',
+        category: productToEdit.category || 'General',
+        price: productToEdit.price || '',
+        stock: productToEdit.stock !== undefined ? productToEdit.stock : '',
+        minStockAlert: productToEdit.minStockAlert !== undefined ? productToEdit.minStockAlert : '5'
+      });
+    } else {
+      setFormData({
+        barcode: '',
+        name: '',
+        description: '',
+        category: 'General',
+        price: '',
+        stock: '',
+        minStockAlert: '5'
+      });
+    }
+  }, [productToEdit, isOpen]);
 
   if (!isOpen) return null;
 
@@ -38,21 +62,25 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
         stock: parseInt(formData.stock),
         minStockAlert: parseInt(formData.minStockAlert)
       });
-      
-      // Reset form after successful save
-      setFormData({
-        barcode: '',
-        name: '',
-        description: '',
-        category: 'General',
-        price: '',
-        stock: '',
-        minStockAlert: '5'
-      });
+      // The parent component handles closing the modal and resetting state
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'Error al guardar el producto');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('¿Estás seguro de que deseas ELIMINAR este producto definitivamente? Esta acción no se puede deshacer.')) {
+      setLoading(true);
+      try {
+        await onDelete(productToEdit._id);
+        // Parent will close modal
+      } catch (err) {
+        setError(err.response?.data?.message || err.message || 'Error al eliminar el producto');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -94,7 +122,7 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
         </button>
 
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>
-          NUEVO PRODUCTO
+          {productToEdit ? 'EDITAR PRODUCTO' : 'NUEVO PRODUCTO'}
         </h2>
 
         {error && (
@@ -151,9 +179,21 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
           </div>
 
           <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+            {productToEdit && onDelete && (
+              <button 
+                type="button" 
+                onClick={handleDelete}
+                disabled={loading}
+                style={{ backgroundColor: 'transparent', color: 'var(--danger-color)', border: '1px solid var(--danger-color)', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                title="Eliminar Producto"
+              >
+                <Trash2 size={20} />
+              </button>
+            )}
             <button 
               type="button" 
               onClick={onClose}
+              disabled={loading}
               style={{ flex: 1, backgroundColor: 'transparent', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
             >
               CANCELAR
@@ -161,9 +201,9 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
             <button 
               type="submit" 
               disabled={loading}
-              style={{ flex: 1, backgroundColor: 'var(--success-color)', color: 'white', border: 'none', fontWeight: 'bold' }}
+              style={{ flex: 2, backgroundColor: 'var(--success-color)', color: 'white', border: 'none', fontWeight: 'bold' }}
             >
-              {loading ? 'GUARDANDO...' : 'GUARDAR PRODUCTO'}
+              {loading ? 'PROCESANDO...' : (productToEdit ? 'ACTUALIZAR PRODUCTO' : 'GUARDAR PRODUCTO')}
             </button>
           </div>
 
