@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { LogOut, Package, ShoppingCart, User as UserIcon } from 'lucide-react';
 import logo from '../assets/logo.png';
 import { useState, useEffect } from 'react';
+import ConfirmDialog from './ConfirmDialog';
 
 // ICONOS ESTRICTAMENTE CUADRADOS
 const SquareSun = ({ size = 20 }) => (
@@ -23,6 +24,7 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'dark');
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -32,6 +34,11 @@ const Layout = () => {
   };
 
   const handleLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutConfirm(false);
     logout();
     navigate('/login');
   };
@@ -131,6 +138,18 @@ const Layout = () => {
           <Outlet />
         </div>
       </main>
+
+      {showLogoutConfirm && (
+        <ConfirmDialog
+          message="¿Cerrar la sesión actual?"
+          detail="Deberás iniciar sesión nuevamente para acceder al sistema Nova Salud."
+          confirmLabel="SÍ, CERRAR SESIÓN"
+          cancelLabel="CANCELAR"
+          type="warning"
+          onConfirm={confirmLogout}
+          onCancel={() => setShowLogoutConfirm(false)}
+        />
+      )}
     </div>
   );
 };
