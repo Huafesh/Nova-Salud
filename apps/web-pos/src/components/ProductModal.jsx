@@ -108,18 +108,18 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>CÓDIGO DE BARRAS *</label>
-              <input type="text" name="barcode" value={formData.barcode} onChange={handleChange} required autoFocus />
+              <input type="text" name="barcode" value={formData.barcode} onChange={handleChange} style={{ width: '100%' }} required autoFocus />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>CATEGORÍA *</label>
-              <input type="text" name="category" value={formData.category} onChange={handleChange} required />
+              <input type="text" name="category" value={formData.category} onChange={handleChange} style={{ width: '100%' }} required />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
             <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>NOMBRE DEL PRODUCTO *</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+            <input type="text" name="name" value={formData.name} onChange={handleChange} style={{ width: '100%' }} required />
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
@@ -136,17 +136,17 @@ const ProductModal = ({ isOpen, onClose, onSave }) => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>PRECIO ($) *</label>
-              <input type="number" step="0.01" min="0" name="price" value={formData.price} onChange={handleChange} required />
+              <input type="number" step="0.01" min="0" name="price" value={formData.price} onChange={handleChange} style={{ width: '100%' }} required />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <label style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>STOCK INICIAL *</label>
-              <input type="number" min="0" name="stock" value={formData.stock} onChange={handleChange} required />
+              <input type="number" min="0" name="stock" value={formData.stock} onChange={handleChange} style={{ width: '100%' }} required />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <label style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--danger-color)' }}>ALERTA MIN.</label>
-              <input type="number" min="0" name="minStockAlert" value={formData.minStockAlert} onChange={handleChange} required />
+              <input type="number" min="0" name="minStockAlert" value={formData.minStockAlert} onChange={handleChange} style={{ width: '100%' }} required />
             </div>
           </div>
 
