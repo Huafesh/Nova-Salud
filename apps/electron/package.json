@@ -1,43 +1,44 @@
 {
-  "name": "nova-salud-electron",
-  "version": "1.0.0",
-  "description": "Nova Salud POS - Aplicacion de escritorio",
-  "main": "main.js",
-  "author": "Nova Salud",
-  "license": "ISC",
-  "scripts": {
-    "start": "electron ."
+  "appId": "com.novasalud.pos",
+  "productName": "Nova Salud POS",
+  "electronVersion": "42.0.0",
+  "electronDist": "../../apps/web-pos/node_modules/electron/dist",
+  "directories": {
+    "output": "../../dist-electron",
+    "app": "../../apps/web-pos"
   },
-  "build": {
-    "appId": "com.novasalud.pos",
-    "productName": "Nova Salud POS",
-    "win": {
-      "target": "nsis",
-      "icon": "../../apps/web-pos/src/assets/logo.png"
+  "win": {
+    "target": "nsis",
+    "icon": "../../apps/web-pos/src/assets/logo.png"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
+  },
+  "files": [
+    "dist/**/*",
+    "!src/**/*",
+    "!node_modules/**/*"
+  ],
+  "extraResources": [
+    {
+      "from": "apps/electron/main.js",
+      "to": "main.js"
     },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "installerIcon": "../../apps/web-pos/src/assets/logo.png",
-      "installerHeaderIcon": "../../apps/web-pos/src/assets/logo.png",
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+    {
+      "from": "apps/electron/preload.js",
+      "to": "preload.js"
     },
-    "files": [
-      "main.js",
-      "preload.js"
-    ],
-    "extraResources": [
-      {
-        "from": "../api",
-        "to": "api",
-        "filter": ["**/*", "!node_modules/**"]
-      },
-      {
-        "from": "../web-pos/dist",
-        "to": "web-pos-dist",
-        "filter": ["**/*"]
-      }
-    ]
-  }
+    {
+      "from": "apps/api",
+      "to": "api",
+      "filter": ["**/*", "!node_modules/**", "!.env*"]
+    },
+    {
+      "from": "apps/web-pos/dist",
+      "to": "web-pos-dist"
+    }
+  ]
 }
