@@ -23,7 +23,7 @@ export const generateReceipt = (saleData, cartItems, total) => {
   const logoSize = 18; // Tamaño del logo en mm
   const logoX = (pageWidth - logoSize) / 2;
   doc.addImage(logoUrl, 'PNG', logoX, y, logoSize, logoSize);
-  y += logoSize + 3;
+  y += logoSize + 7;
 
   // ─── CABECERA ───────────────────────────────────────────────────────────────
   doc.setFontSize(14);

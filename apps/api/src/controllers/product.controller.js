@@ -45,8 +45,8 @@ export const updateProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   try {
-    // Soft delete
-    const product = await Product.findByIdAndUpdate(req.params.id, { isActive: false }, { new: true });
+    // Hard delete - removes document completely from MongoDB
+    const product = await Product.findByIdAndDelete(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
