@@ -23,11 +23,9 @@ const seedDatabase = async () => {
     // 1. Create Users
     const salt = bcrypt.genSaltSync(10);
     const adminPassword = bcrypt.hashSync('admin123', salt);
-    const cashierPassword = bcrypt.hashSync('cajero123', salt);
 
     const users = await User.insertMany([
-      { name: 'Admin', email: 'admin', password: adminPassword, role: 'admin' },
-      { name: 'Cajero', email: 'cajero', password: cashierPassword, role: 'cashier' }
+      { name: 'Administrador General', email: 'admin', password: adminPassword, role: 'admin' }
     ]);
 
     console.log('✅ Users created:', users.length);
