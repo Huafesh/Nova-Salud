@@ -34,7 +34,7 @@
       {
         "from": "../api",
         "to": "api",
-        "filter": ["**/*", "!node_modules/**", "!.env*"]
+        "filter": ["**/*", "!.env*"]
       }
     ]
   },
