@@ -70,4 +70,4 @@ Si deseas visualizar los datos en tiempo real, puedes conectar MongoDB Compass u
 Para evitar conflictos de puertos, asegúrese de cerrar la versión Desktop antes de iniciar la versión Web, ya que ambas utilizan el puerto **5000** para comunicarse con la API del servidor.
 
 ---
-**Desarrollado con ❤️ por:** [Huafesh 🥷](https://github.com/Huafesh)
+**Desarrollado por:** [Huafesh 🥷](https://github.com/Huafesh)
