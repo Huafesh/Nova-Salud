@@ -37,7 +37,7 @@ Es la versión desktop para el usuario.
     ```bash
     docker compose -f docker/docker-compose.yml up -d
     ```
-2.  **Iniciar App:** Extrae el archivo `Nova-Salud-ENTREGABLE.zip` y ejecuta `Nova Salud.exe`.
+2.  **Iniciar App:** Extrae el archivo `Nova Salud POS v1.0.0 (Desktop Versión)` y ejecuta `Nova Salud.exe`.
 
 ### 🌐 Opción B: Ejecución Web (Desarrollo)
 Ideal para inspección de código o uso en navegador.
