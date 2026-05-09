@@ -61,4 +61,4 @@ Si desea visualizar los datos crudos directamente en la base de datos:
 > **Nota:** Para evitar conflictos de puerto, asegúrese de cerrar la versión Desktop antes de iniciar la versión Web, ya que ambas utilizan el puerto 5000 para la API.
 
 ---
-**Desarrollado por:** Nova Salud Team 💊
+**Desarrollado por:** Huafesh 🥷
