@@ -33,8 +33,7 @@
     "extraResources": [
       {
         "from": "../api",
-        "to": "api",
-        "filter": ["**/*", "!.env*"]
+        "to": "api"
       }
     ]
   },

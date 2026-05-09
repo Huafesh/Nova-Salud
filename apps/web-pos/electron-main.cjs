@@ -62,23 +62,34 @@ function startApiServer() {
 
     console.log('🚀 Iniciando servidor API en:', apiPath);
 
-    apiProcess = spawn(process.execPath, ['src/index.js'], {
+    const apiFile = app.isPackaged ? 'server.cjs' : 'src/index.js';
+    
+    apiProcess = spawn(process.execPath, [apiFile], {
       cwd: apiPath,
       env: { ...process.env, NODE_ENV: 'production', ELECTRON_RUN_AS_NODE: '1' },
       stdio: ['ignore', 'pipe', 'pipe'],
       shell: false,
     });
 
+    const fs = require('fs');
+    const logPath = path.join(app.getPath('desktop'), 'nova_salud_api_log.txt');
+    fs.writeFileSync(logPath, 'INICIANDO API...\n');
+
     apiProcess.stdout.on('data', (data) => {
-      console.log('[API]', data.toString().trim());
+      const msg = data.toString().trim();
+      console.log('[API]', msg);
+      fs.appendFileSync(logPath, '[stdout] ' + msg + '\n');
     });
 
     apiProcess.stderr.on('data', (data) => {
-      console.error('[API ERR]', data.toString().trim());
+      const msg = data.toString().trim();
+      console.error('[API ERR]', msg);
+      fs.appendFileSync(logPath, '[stderr] ' + msg + '\n');
     });
 
     apiProcess.on('error', (err) => {
       console.error('Error al iniciar API:', err);
+      fs.appendFileSync(logPath, '[error] ' + err.message + '\n');
       reject(err);
     });
 
