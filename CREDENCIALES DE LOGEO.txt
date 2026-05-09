@@ -5,7 +5,7 @@
 ESTE PROYECTO TIENE DOS FORMAS DE EJECUTARSE:
 
 --------------------------------------------------------
- OPCIÓN A: VERSIÓN DESKTOP (Ejeuctable .exe)
+ OPCIÓN A: VERSIÓN DESKTOP (Ejecutable .exe)
 --------------------------------------------------------
 Es la forma más rápida de probar el sistema completo.
 
@@ -15,11 +15,11 @@ REQUISITO: Tener Docker Desktop abierto.
    docker compose -f docker/docker-compose.yml up -d
 
 2. Ejecutar la aplicación:
-   Extraer el archivo "Nova-Salud-POS-v1.0.0-win64.zip" 
-   y abrir el archivo "Nova Salud POS.exe".
+   Extraer el archivo "Nova-Salud-ENTREGABLE.zip" 
+   y abrir el archivo "Nova Salud.exe".
 
 --------------------------------------------------------
- OPCIÓN B: VERSIÓN WEB (Para Desarrollo/Navegador)
+ OPCIÓN B: VERSIÓN WEB (Desarrollo / Navegador)
 --------------------------------------------------------
 REQUISITO: Tener Docker Desktop abierto.
 
