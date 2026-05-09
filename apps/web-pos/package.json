@@ -16,14 +16,14 @@
   },
   "build": {
     "appId": "com.novasalud.pos",
-    "productName": "Nova Salud POS",
+    "productName": "Nova Salud",
     "electronVersion": "42.0.0",
     "directories": {
       "output": "../../dist-electron"
     },
     "win": {
       "target": "portable",
-      "icon": "public/favicon.png"
+      "icon": "build/icon.ico"
     },
     "files": [
       "dist/**/*",
