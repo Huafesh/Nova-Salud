@@ -1,48 +1,75 @@
-========================================================
-     NOVA SALUD POS - GUÍA DE INICIO RÁPIDO
-========================================================
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║            NOVA SALUD POS - GUÍA DE INICIO RÁPIDO             ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
 
-ESTE PROYECTO TIENE DOS FORMAS DE EJECUTARSE:
+┌─ FORMAS DE EJECUTAR EL PROYECTO ─────────────────────────────┐
 
---------------------------------------------------------
- OPCIÓN A: VERSIÓN DESKTOP (Ejecutable .exe)
---------------------------------------------------------
-Es la forma más rápida de probar el sistema completo.
+┌─ OPCIÓN A: VERSIÓN DESKTOP (Ejecutable .exe) ───────────────┐
+│                                                              │
+│ La forma más rápida de probar el sistema completo.          │
+│                                                              │
+│ REQUISITO: Tener Docker Desktop abierto                     │
+│                                                              │
+│ PASO 1: Iniciar la base de datos                            │
+│   • Abrir terminal en la carpeta raíz del proyecto           │
+│   • Ejecutar comando:                                        │
+│     docker compose -f docker/docker-compose.yml up -d       │
+│                                                              │
+│ PASO 2: Ejecutar la aplicación                              │
+│   • Extraer el archivo "Nova-Salud-ENTREGABLE.zip"          │
+│   • Abrir el archivo "Nova Salud.exe"                       │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 
-REQUISITO: Tener Docker Desktop abierto.
+┌─ OPCIÓN B: VERSIÓN WEB (Desarrollo / Navegador) ────────────┐
+│                                                              │
+│ REQUISITO: Tener Docker Desktop abierto                     │
+│                                                              │
+│ PASO 1: Iniciar la base de datos                            │
+│   • Abrir terminal en la carpeta raíz                        │
+│   • Ejecutar comando:                                        │
+│     docker compose -f docker/docker-compose.yml up -d       │
+│                                                              │
+│ PASO 2: Iniciar el servidor de desarrollo                   │
+│   • Abrir terminal en la carpeta "apps/web-pos"             │
+│   • Ejecutar comando:                                        │
+│     npm run dev                                              │
+│                                                              │
+│ PASO 3: Acceder a la aplicación                             │
+│   • Abrir navegador web                                      │
+│   • Ir a: http://localhost:5173                             │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 
-1. Iniciar la base de datos (Terminal en la carpeta raíz):
-   docker compose -f docker/docker-compose.yml up -d
+┌─ CREDENCIALES DE LOGEO ──────────────────────────────────────┐
+│                                                              │
+│ Válido para AMBAS versiones (Desktop y Web)                 │
+│                                                              │
+│   Usuario:  admin                                            │
+│   Clave:    admin123                                         │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 
-2. Ejecutar la aplicación:
-   Extraer el archivo "Nova-Salud-ENTREGABLE.zip" 
-   y abrir el archivo "Nova Salud.exe".
+┌─ CONEXIÓN A MONGODB COMPASS (Para visualizar datos) ────────┐
+│                                                              │
+│ URI de conexión:                                             │
+│   mongodb://127.0.0.1:27017/nova-salud                      │
+│                                                              │
+│ Nota: No requiere usuario ni contraseña en conexión local   │
+│                                                              │
+│ Pasos:                                                       │
+│   1. Abrir MongoDB Compass                                   │
+│   2. Copiar y pegar la URI anterior                          │
+│   3. Hacer clic en "Connect"                                │
+│   4. Explorar la base de datos "nova-salud"                │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 
---------------------------------------------------------
- OPCIÓN B: VERSIÓN WEB (Desarrollo / Navegador)
---------------------------------------------------------
-REQUISITO: Tener Docker Desktop abierto.
-
-1. Iniciar la base de datos:
-   docker compose -f docker/docker-compose.yml up -d
-
-2. Abrir terminal en la carpeta "apps/web-pos" y ejecutar:
-   npm run dev
-
-3. Acceder en el navegador a: http://localhost:5173
-
---------------------------------------------------------
- CREDENCIALES DE LOGEO (Válido para ambas versiones)
---------------------------------------------------------
-   Usuario : admin
-   Clave   : admin123
-
---------------------------------------------------------
- CONEXIÓN A MONGODB COMPASS (Para ver los datos)
---------------------------------------------------------
-   URI: mongodb://127.0.0.1:27017/nova-salud
-   (No requiere usuario ni contraseña en la conexión local)
-
-========================================================
- Desarrollado por: Nova Salud Team
-========================================================
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║              Desarrollado por: Nova Salud Team               ║
+║                   2026 - Todos los derechos                   ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
