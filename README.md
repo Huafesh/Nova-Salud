@@ -32,7 +32,7 @@ El proyecto ha sido construido utilizando las tecnologías más modernas de la i
 Para que el sistema funcione (tanto en web como en desktop), es necesario tener **Docker Desktop** instalado y en ejecución para levantar el contenedor de la base de datos.
 
 ### 💻 Opción A: Ejecución Desktop (Recomendado)
-Es la versión final para el usuario final.
+Es la versión desktop para el usuario.
 1.  **Levantar Base de Datos:** Abre una terminal en la raíz y ejecuta:
     ```bash
     docker compose -f docker/docker-compose.yml up -d
