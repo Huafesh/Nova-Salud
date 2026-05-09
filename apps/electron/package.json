@@ -1,44 +1,39 @@
 {
-  "appId": "com.novasalud.pos",
-  "productName": "Nova Salud POS",
-  "electronVersion": "42.0.0",
-  "electronDist": "../../apps/web-pos/node_modules/electron/dist",
-  "directories": {
-    "output": "../../dist-electron",
-    "app": "../../apps/web-pos"
-  },
-  "win": {
-    "target": "nsis",
-    "icon": "../../apps/web-pos/src/assets/logo.png"
-  },
-  "nsis": {
-    "oneClick": false,
-    "allowToChangeInstallationDirectory": true,
-    "createDesktopShortcut": true,
-    "createStartMenuShortcut": true
-  },
-  "files": [
-    "dist/**/*",
-    "!src/**/*",
-    "!node_modules/**/*"
-  ],
-  "extraResources": [
-    {
-      "from": "apps/electron/main.js",
-      "to": "main.js"
+  "name": "nova-salud-pos",
+  "version": "1.0.0",
+  "description": "Nova Salud POS Desktop System",
+  "author": "Nova Salud",
+  "main": "main.js",
+  "build": {
+    "appId": "com.novasalud.pos",
+    "productName": "Nova Salud POS",
+    "electronVersion": "42.0.0",
+    "directories": {
+      "output": "../../dist-electron",
+      "app": "../web-pos"
     },
-    {
-      "from": "apps/electron/preload.js",
-      "to": "preload.js"
+    "win": {
+      "target": "nsis",
+      "icon": "../web-pos/public/favicon.ico"
     },
-    {
-      "from": "apps/api",
-      "to": "api",
-      "filter": ["**/*", "!node_modules/**", "!.env*"]
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     },
-    {
-      "from": "apps/web-pos/dist",
-      "to": "web-pos-dist"
-    }
-  ]
+    "files": [
+      "dist/**/*",
+      "electron-main.cjs",
+      "electron-preload.cjs",
+      "!src/**/*",
+      "!node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../api",
+        "to": "api"
+      }
+    ]
+  }
 }
