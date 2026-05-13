@@ -48,4 +48,4 @@ Si deseas ver los datos en tiempo real:
 *   *(No requiere usuario ni contraseña para la conexión local)*
 
 ---
-> **Desarrollado por:** Nova Salud Team | 2026
+> **Desarrollado por:** Huafesh
