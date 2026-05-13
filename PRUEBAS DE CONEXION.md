@@ -36,4 +36,4 @@ Verificación de los datos persistidos en la base de datos local a través de la
 Las pruebas demuestran que el sistema es robusto, persistente y está correctamente integrado con las tecnologías de contenedores y bases de datos requeridas.
 
 ---
-**Huafesh 🥷** - *Evidencia de Desarrollo 2026*
+**[Huafesh 🥷](https://github.com/Huafesh)** - *Evidencia de Desarrollo 2026*
